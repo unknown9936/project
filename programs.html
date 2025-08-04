@@ -1,0 +1,134 @@
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>البرامج الحسابية - محمود السماني</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .program {
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 400px;
+    }
+
+    input {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 8px;
+      border: none;
+      width: 80%;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: none;
+      background-color: #1e90ff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00bfff;
+    }
+
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>البرامج الحسابية</h1>
+
+  <!-- حجم الأسطوانة -->
+  <div class="program">
+    <h2>حساب حجم الأسطوانة</h2>
+    <input type="number" id="radius1" placeholder="نصف القطر">
+    <input type="number" id="height1" placeholder="الارتفاع">
+    <button onclick="calcCylinder()">احسب</button>
+    <div class="result" id="cylinderResult"></div>
+  </div>
+
+  <!-- مساحة الدائرة -->
+  <div class="program">
+    <h2>حساب مساحة الدائرة</h2>
+    <input type="number" id="radius2" placeholder="نصف القطر">
+    <button onclick="calcCircle()">احسب</button>
+    <div class="result" id="circleResult"></div>
+  </div>
+
+  <!-- حل معادلة من الدرجة الثانية -->
+  <div class="program">
+    <h2>حل معادلة من الدرجة الثانية</h2>
+    <input type="number" id="a" placeholder="a">
+    <input type="number" id="b" placeholder="b">
+    <input type="number" id="c" placeholder="c">
+    <button onclick="solveQuadratic()">حل</button>
+    <div class="result" id="quadraticResult"></div>
+  </div>
+
+  <script>
+    function calcCylinder() {
+      const r = parseFloat(document.getElementById('radius1').value);
+      const h = parseFloat(document.getElementById('height1').value);
+      const result = Math.PI * r * r * h;
+      document.getElementById('cylinderResult').textContent = 'الحجم: ' + result.toFixed(2);
+    }
+
+    function calcCircle() {
+      const r = parseFloat(document.getElementById('radius2').value);
+      const result = Math.PI * r * r;
+      document.getElementById('circleResult').textContent = 'المساحة: ' + result.toFixed(2);
+    }
+
+    function solveQuadratic() {
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const c = parseFloat(document.getElementById('c').value);
+      const delta = b * b - 4 * a * c;
+
+      let resultText = '';
+      if (delta < 0) {
+        resultText = 'لا توجد حلول حقيقية.';
+      } else if (delta === 0) {
+        const x = -b / (2 * a);
+        resultText = 'حل واحد: ' + x.toFixed(2);
+      } else {
+        const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+        const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+        resultText = 'حلّان: ' + x1.toFixed(2) + ' و ' + x2.toFixed(2);
+      }
+
+      document.getElementById('quadraticResult').textContent = resultText;
+    }
+  </script>
+</body>
+</html>
